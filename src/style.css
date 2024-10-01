@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #06c;
+  --secondary-color: #1b2021;
+  --text-color: #ffffff;
+  --grid-size-large: 100px;
+  --grid-size-small: 20px;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: var(--primary-color);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 2px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: var(--grid-size-large) var(--grid-size-large),
+    var(--grid-size-large) var(--grid-size-large),
+    var(--grid-size-small) var(--grid-size-small),
+    var(--grid-size-small) var(--grid-size-small);
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--text-color);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

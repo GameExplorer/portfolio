@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
   --primary-color: #06c;
@@ -13,33 +13,10 @@
 body {
   font-family: "Nunito", sans-serif;
   background-color: var(--primary-color);
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.2) 2px,
-      transparent 2px
-    ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: var(--grid-size-large) var(--grid-size-large),
-    var(--grid-size-large) var(--grid-size-large),
-    var(--grid-size-small) var(--grid-size-small),
-    var(--grid-size-small) var(--grid-size-small);
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: var(--text-color);
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 50px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  pointer-events: none;
 }
 
 .container {
@@ -62,5 +39,40 @@ h2 {
 
   h2 {
     font-size: 1.5rem;
+  }
+}
+
+.floating-icons {
+  position: relative;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-icons i {
+  position: absolute;
+  font-size: 5em;
+  opacity: 0.8;
+  text-shadow: 0 0 10px yellow;
+  animation: smooth-bounce-float var(--duration) linear infinite; 
+}
+
+@keyframes smooth-bounce-float {
+  0% {
+    transform: translateX(0) translateY(calc(var(--bounce-height) * sin(0)));
+  }
+  25% {
+    transform: translateX(25vw)
+      translateY(calc(var(--bounce-height) * sin(PI * 0.5)));
+  }
+  50% {
+    transform: translateX(50vw) translateY(calc(var(--bounce-height) * sin(PI)));
+  }
+  75% {
+    transform: translateX(75vw)
+      translateY(calc(var(--bounce-height) * sin(PI * 1.5)));
+  }
+  100% {
+    transform: translateX(100vw)
+      translateY(calc(var(--bounce-height) * sin(PI * 2)));
   }
 }

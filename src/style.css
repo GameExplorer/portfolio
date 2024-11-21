@@ -10,69 +10,34 @@
   --grid-size-small: 20px;
 }
 
-body {
-  font-family: "Nunito", sans-serif;
-  background-color: var(--primary-color);
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: var(--text-color);
+@font-face {
+  font-family: "Windows-Regular";
+  src: url("assets/fonts/Windows Regular.ttf") format("truetype");
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--secondary-color);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+body {
+  font-family: "Microsoft Sans Serif", "Windows-Regular", sans-serif;
+  margin: 0;
+  padding: 1px;
+  background-color: #c0c0c0;
+  color: #000000;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-style: solid;
+  border-width: 0.15em;
+  border-color: #dfdfdf #404040 #404040 #dfdfdf;
+  pointer-events: none;
 }
 
 h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-}
-
-.floating-icons {
-  position: relative;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.floating-icons i {
-  position: absolute;
-  font-size: 5em;
-  opacity: 0.8;
-  text-shadow: 0 0 10px yellow;
-  animation: smooth-bounce-float var(--duration) linear infinite; 
-}
-
-@keyframes smooth-bounce-float {
-  0% {
-    transform: translateX(0) translateY(calc(var(--bounce-height) * sin(0)));
-  }
-  25% {
-    transform: translateX(25vw)
-      translateY(calc(var(--bounce-height) * sin(PI * 0.5)));
-  }
-  50% {
-    transform: translateX(50vw) translateY(calc(var(--bounce-height) * sin(PI)));
-  }
-  75% {
-    transform: translateX(75vw)
-      translateY(calc(var(--bounce-height) * sin(PI * 1.5)));
-  }
-  100% {
-    transform: translateX(100vw)
-      translateY(calc(var(--bounce-height) * sin(PI * 2)));
-  }
 }

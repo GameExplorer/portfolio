@@ -4,6 +4,8 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "My Portfolio Project",
   description: "Portfolio description",
+  base: '/docs/', // Add this line for Vercel routing
+  outDir: '.vitepress/dist', // Add this line to specify build output
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [

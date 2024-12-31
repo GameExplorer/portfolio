@@ -1,0 +1,22 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build && npm run docs:build",
+        "outputDirectory": "."
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/docs/(.*)",
+      "dest": "/docs/.vitepress/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
+  ]
+}

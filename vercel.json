@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/docs",
+      "destination": "/docs/index.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/docs/:path*",
+      "statusCode": 200
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/docs",
+      "destination": "/docs/index.html"
+    }
+  ]
+}

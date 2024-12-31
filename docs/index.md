@@ -21,3 +21,11 @@ features:
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
+---
+title: Docs with VitePress
+editLink: true
+---
+
+# {{ $frontmatter.title }}
+
+Guide content

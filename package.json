@@ -9,7 +9,6 @@
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "build:all": "npm run build && npm run build:docs && node scripts/merge-outputs.js",
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {

@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build:all",
+  "outputDirectory": "dist",
+  "routes": [
+    {
+      "source": "/docs(.*)",
+      "destination": "/docs/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ]
+}

@@ -4,15 +4,13 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "My Portfolio Project",
   description: "Portfolio description",
-  base: '/docs/', // Add this line for Vercel routing
-  outDir: '.vitepress/dist', // Add this line to specify build output
+  base: '/docs/', // Ensures paths are correct when deployed
+  outDir: '.vitepress/dist', // Specifies build output directory
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Examples', link: '/markdown-examples' }
     ],
-
     sidebar: [
       {
         text: 'Examples',
@@ -22,9 +20,9 @@ export default defineConfig({
         ]
       }
     ],
-
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
   }
-})
+});
+

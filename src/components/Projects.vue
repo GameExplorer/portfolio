@@ -184,7 +184,7 @@ export default {
         </div>
       </div>
       <div
-        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm"
+        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-20"
       >
         {{ filteredProjects.length }} project(s) | {{ currentTab }} view
       </div>

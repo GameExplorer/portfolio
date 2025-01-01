@@ -142,8 +142,8 @@ export default {
 }
 
 .window {
-  width: 400px; 
-  height: 300px; 
+  width: 400px;
+  height: 300px;
   background-color: #c7c9c8;
   border: 3px solid #ffffff;
   border-top-color: #ffffff;
@@ -151,12 +151,12 @@ export default {
   border-bottom-color: #7a7a7a;
   border-right-color: #7a7a7a;
   box-shadow: inset -1px -1px 1px #ffffff, inset 1px 1px 1px #7a7a7a;
-  position: fixed; 
-  top: 50%; 
-  left: 50%; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden; 
-  display: flex; 
+  overflow: hidden;
+  display: flex;
   flex-direction: column;
 }
 
@@ -167,7 +167,7 @@ export default {
 
 .window-content {
   flex-grow: 1;
-  overflow-y: auto; 
+  overflow-y: auto;
   padding: 8px;
 }
 
@@ -316,15 +316,20 @@ img:hover {
             :key="index"
             class="taskbar-icon flex items-center"
           >
-            <img :src="getAppIcon(app)" alt="App Icon" class="w-4 h-4 mr-2" />
-            {{ app }}
-            <!--<span
-              @click="$emit('close', app)"
+            <div 
+              class="flex items-center flex-grow cursor-pointer"
+              @click="$emit('focus', app)"
+            >
+              <img :src="getAppIcon(app)" alt="App Icon" class="w-4 h-4 mr-2" />
+              {{ app }}
+            </div>
+            <span
+              @click.stop="$emit('close', app)"
               class="ml-4 text-red-500 cursor-pointer"
               aria-label="Close"
             >
               X
-            </span>-->
+            </span>
           </span>
         </li>
         <li>

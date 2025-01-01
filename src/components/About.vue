@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="border-2 border-gray-400 max-w-5xl mx-auto">
+  <div class="border-2 border-gray-400 max-w-5xl mx-auto mb-24">
     <div class="title-bar px-2 py-1 flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <span class="text-white">👤</span>
@@ -136,7 +136,7 @@ export default {
         </div>
       </div>
       <div
-        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm"
+        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-16"
       >
         Last updated: December 2024
       </div>

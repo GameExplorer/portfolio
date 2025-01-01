@@ -9,24 +9,11 @@
 
 body {
   font-family: "Microsoft Sans Serif", "Windows-Regular", sans-serif;
-  margin: 0;
-  padding: 1px;
   background-color: #c0c0c0;
   color: #000000;
-  position: relative;
-  overflow: hidden;
-}
-* {
   cursor: url("/cursor.png"), auto;
 }
 
-text,
-p,
-span,
-input[type="text"],
-textarea {
-  cursor: url("/cursor.png"), text;
-}
 
 a:hover,
 button:hover,
@@ -36,3 +23,4 @@ select:hover,
 [role="link"]:hover {
   cursor: url("/cursor_hover.png"), pointer;
 }
+

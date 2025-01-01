@@ -109,6 +109,11 @@ export default {
     minimizeWindow() {
       this.isWindowOpen = false;
     },
+    focusApp(appName) {
+      if (this.openApps.includes(appName) && !this.isWindowOpen) {
+        this.isWindowOpen = true;
+      }
+    },
   },
 };
 </script>
@@ -122,7 +127,11 @@ export default {
 }
 
 .desktop[data-cursor="progress"] {
-  cursor: url("/windows-98-hourglass.png"), progress;
+  cursor: url("/windows-98-hourglass.png"), progress !important;
+}
+
+.desktop[data-cursor="default"] {
+  cursor: url("/cursor.png"), default !important;
 }
 
 .window {
@@ -137,7 +146,7 @@ export default {
   font-size: 1.1em;
 }
 
-.icons:hover {
+.desktop[data-cursor="pointer"] {
   cursor: url("/cursor_hover.png"), pointer;
 }
 </style>
@@ -190,13 +199,13 @@ export default {
           </div>
         </div>
         <MenuItems />
-        <div class="window-content p-4 overflow-auto">
+        <div class="window-content p-4">
           <Portfolio ref="portfolio" />
         </div>
       </div>
     </div>
-    <div ref="taskbar" class="taskbar z-[9999]">
-      <Taskbar :openApps="openApps" @close="closeWindow" @open="openWindow" />
+    <div ref="taskbar" class="taskbar z-20">
+      <Taskbar :openApps="openApps" @close="closeWindow" @focus="focusApp" @open="openWindow" />
     </div>
   </div>
 </template>

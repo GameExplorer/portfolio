@@ -1,20 +1,18 @@
 {
-  "redirects": [
+  "builds": [
     {
-      "source": "/docs",
-      "destination": "/docs/index.html",
-      "statusCode": 301
+      "src": "docs", 
+      "dest": ".next/static" 
     },
     {
-      "source": "/docs/:path*",
-      "destination": "/docs/:path*",
-      "statusCode": 200
+      "src": "my-vue-project", 
+      "dest": ".next/static" 
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/docs",
-      "destination": "/docs/index.html"
+      "src": "/docs/(.*)",
+      "dest": "/.next/static/docs/$1" 
     }
   ]
 }

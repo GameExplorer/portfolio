@@ -28,6 +28,8 @@ export default {
     getAppIcon(appName) {
       const icons = {
         Portfolio: "/portfolio_icon.png",
+        Credits: "/notepad.png",
+        "System Information": "/task_manager.png",
       };
       return icons[appName] || "/portfolio_icon.png";
     },
@@ -314,10 +316,10 @@ img:hover {
           <span
             v-for="(app, index) in openApps"
             :key="index"
-            class="taskbar-icon flex items-center"
+            class="taskbar-icon inline-flex items-center mx-1"
           >
             <div 
-              class="flex items-center flex-grow cursor-pointer"
+              class="flex flex-grow items-center cursor-pointer font-bold"
               @click="$emit('focus', app)"
             >
               <img :src="getAppIcon(app)" alt="App Icon" class="w-4 h-4 mr-2" />

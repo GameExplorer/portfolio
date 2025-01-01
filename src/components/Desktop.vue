@@ -2,6 +2,7 @@
 import Taskbar from "./taskbar.vue";
 import Portfolio from "./Portfolio.vue";
 import MenuItems from "./MenuItems.vue";
+import Credits from "./CreditsWindow.vue";
 
 export default {
   name: "Desktop",
@@ -9,6 +10,7 @@ export default {
     Taskbar,
     Portfolio,
     MenuItems,
+    Credits,
   },
   data() {
     return {
@@ -47,7 +49,11 @@ export default {
         },
       ],
       dragOffset: { x: 0, y: 0 },
-      isWindowOpen: false,
+      windowStates: {
+        Portfolio: { isOpen: false },
+        Credits: { isOpen: false },
+        "System Information": { isOpen: false },
+      },
       openApps: [],
       randomOpenTime: 0,
       cursor: "default",
@@ -91,8 +97,16 @@ export default {
       if (app.url === "none") {
         this.cursor = "progress";
         this.randomOpenTime = Math.floor(Math.random() * 1500);
+
         setTimeout(() => {
-          this.isWindowOpen = true;
+          // Initialize the window state if it doesn't exist
+          if (!this.windowStates[appName]) {
+            this.$set(this.windowStates, appName, { isOpen: false });
+          }
+
+          // Set the window state to open
+          this.windowStates[appName].isOpen = true;
+
           this.cursor = "default";
           if (!this.openApps.includes(appName)) {
             this.openApps.push(appName);
@@ -103,15 +117,21 @@ export default {
       }
     },
     closeWindow(appName) {
-      this.isWindowOpen = false;
+      if (this.windowStates[appName]) {
+        this.windowStates[appName].isOpen = false;
+      }
       this.openApps = this.openApps.filter((app) => app !== appName);
     },
-    minimizeWindow() {
-      this.isWindowOpen = false;
+
+    minimizeWindow(appName) {
+      if (this.windowStates[appName]) {
+        this.windowStates[appName].isOpen = false;
+      }
     },
+
     focusApp(appName) {
-      if (this.openApps.includes(appName) && !this.isWindowOpen) {
-        this.isWindowOpen = true;
+      if (this.openApps.includes(appName) && this.windowStates[appName]) {
+        this.windowStates[appName].isOpen = true;
       }
     },
   },
@@ -153,7 +173,12 @@ export default {
 
 <template>
   <div class="desktop h-screen flex flex-col" :data-cursor="cursor">
-    <div class="flex-grow relative" @dragover.prevent @drop.prevent>
+    <div
+      class="flex-grow relative overflow-hidden"
+      @dragover.prevent
+      @drop.prevent
+    >
+      <!-- Icons -->
       <div
         v-for="(icon, index) in icons"
         :key="index"
@@ -174,38 +199,97 @@ export default {
         </p>
       </div>
 
-      <div v-if="isWindowOpen" class="window fixed">
-        <div class="title-bar">
-          <div class="title-bar-text text-2xl uppercase inline-flex">
-            <img
-              src="/portfolio_icon.png"
-              alt="page icon"
-              class="pr-2"
-            />Petar.dev
-          </div>
-          <div class="title-bar-controls p-2">
-            <button
-              aria-label="Minimize"
-              class="bg-gray-300"
-              @click="minimizeWindow"
-            ></button>
-            <button
-              aria-label="Close"
-              class="bg-gray-300"
-              @click="closeWindow('Portfolio')"
-            >
-              X
-            </button>
-          </div>
+      <!-- Windows -->
+      <template v-for="app in openApps" :key="app">
+        <div v-if="windowStates[app]?.isOpen" class="window fixed">
+          <!-- Portfolio Window -->
+          <template v-if="app === 'Portfolio'">
+            <div class="title-bar">
+              <div class="title-bar-text text-2xl uppercase inline-flex">
+                <img src="/portfolio_icon.png" alt="page icon" class="pr-2" />
+                Portfolio
+              </div>
+              <div class="title-bar-controls p-2">
+                <button
+                  aria-label="Minimize"
+                  class="bg-gray-300"
+                  @click="minimizeWindow(app)"
+                ></button>
+                <button
+                  aria-label="Close"
+                  class="bg-gray-300"
+                  @click="closeWindow(app)"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <MenuItems />
+            <div class="window-content p-4">
+              <Portfolio ref="portfolio" />
+            </div>
+          </template>
+
+          <!-- Credits Window -->
+          <template v-if="app === 'Credits'">
+            <div class="title-bar">
+              <div class="title-bar-text text-2xl uppercase inline-flex">
+                <img src="/notepad.png" alt="page icon" class="pr-2" />
+                Credits
+              </div>
+              <div class="title-bar-controls p-2">
+                <button
+                  aria-label="Minimize"
+                  class="bg-gray-300"
+                  @click="minimizeWindow(app)"
+                ></button>
+                <button
+                  aria-label="Close"
+                  class="bg-gray-300"
+                  @click="closeWindow(app)"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <Credits />
+          </template>
+
+          <!-- System Information Window -->
+          <template v-if="app === 'System Information'">
+            <div class="title-bar">
+              <div class="title-bar-text text-2xl uppercase inline-flex">
+                <img src="/task_manager.png" alt="page icon" class="pr-2" />
+                System Information
+              </div>
+              <div class="title-bar-controls p-2">
+                <button
+                  aria-label="Minimize"
+                  class="bg-gray-300"
+                  @click="minimizeWindow(app)"
+                ></button>
+                <button
+                  aria-label="Close"
+                  class="bg-gray-300"
+                  @click="closeWindow(app)"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <!-- Add your System Information component here -->
+          </template>
         </div>
-        <MenuItems />
-        <div class="window-content p-4">
-          <Portfolio ref="portfolio" />
-        </div>
-      </div>
+      </template>
     </div>
-    <div ref="taskbar" class="taskbar z-20">
-      <Taskbar :openApps="openApps" @close="closeWindow" @focus="focusApp" @open="openWindow" />
+
+    <div ref="taskbar" class="taskbar fixed w-full bottom-0 right-0 z-20">
+      <Taskbar
+        :openApps="openApps"
+        @close="closeWindow"
+        @focus="focusApp"
+        @open="openWindow"
+      />
     </div>
   </div>
 </template>

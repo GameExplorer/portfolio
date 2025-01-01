@@ -14,7 +14,7 @@ export default {
           id: 1,
           title: "petar.fun",
           type: "web",
-          description: "A website with a mixtures of random things",
+          description: "A website with a mixtures of random things that I like and do.",
           image: "/ProjectImages/petar_fun.png",
           technologies: ["Vue.js", "JS", "Tailwind CSS"],
           github: "https://github.com/GameExplorer/petar_fun",
@@ -111,7 +111,7 @@ export default {
             </button>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
           <div
             v-for="project in filteredProjects"
             :key="project.id"
@@ -143,7 +143,7 @@ export default {
                 <img
                   :src="project.image"
                   :alt="project.title"
-                  class="w-full h-32 object-cover"
+                  class="w-full h-auto lg:h-32 object-cover"
                 />
               </div>
               <div>
@@ -160,7 +160,7 @@ export default {
                     </span>
                   </div>
                 </div>
-                <div class="flex space-x-2">
+                <div class="flex space-x-2 mb-4">
                   <a
                     v-if="project.github"
                     :href="project.github"
@@ -184,7 +184,7 @@ export default {
         </div>
       </div>
       <div
-        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-20"
+        class="border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-12"
       >
         {{ filteredProjects.length }} project(s) | {{ currentTab }} view
       </div>

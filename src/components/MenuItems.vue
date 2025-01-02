@@ -37,25 +37,23 @@ export default {
         {
           name: "Insert",
           submenu: [
-            { name: "Image", keybinds:"Ctrl+I", disabled: false },
-            { name: "Link", keybinds:"Ctrl+L", disabled: false },
-            { name: "Table", keybinds:"Ctrl+T", disabled: true },
+            { name: "Image... ", keybinds:"Ctrl+I", disabled: true },
+            { name: "Link... ", keybinds:"Ctrl+L", disabled: false },
+            { name: "Table... ", keybinds:"Ctrl+T", disabled: true },
           ],
         },
         {
           name: "Format",
           submenu: [
-            { name: "Bold", keybinds:"Ctrl+B", disabled: false },
-            { name: "Italic", keybinds:"Ctrl+I", disabled: false },
-            { name: "Underline", keybinds:"Ctrl+U", disabled: false },
+            { name: "Bold... ", keybinds:"Ctrl+B", disabled: false },
+            { name: "Italic... ", keybinds:"Ctrl+I", disabled: false },
+            { name: "Underline... ", keybinds:"Ctrl+U", disabled: false },
           ],
         },
         {
           name: "Help",
           submenu: [
             { name: "About", disabled: false },
-            { name: "Contact", disabled: false },
-            { name: "Documentation", disabled: false },
           ],
         },
       ],
@@ -120,7 +118,7 @@ export default {
 }
 
 .submenu li {
-  padding: 8px 24px;
+  padding: 8px 12px;
   white-space: nowrap;
 }
 
@@ -177,18 +175,18 @@ export default {
       <li
         v-for="(menuItem, index) in menuItems"
         :key="index"
-        class="group relative px-2 cursor-pointer"
+        class="group relative px-1 lg:px-2 cursor-pointer"
       >
         {{ menuItem.name }}
         <ul
           v-if="menuItem.submenu && menuItem.submenu.length"
-          class="submenu absolute left-0 mt-2 hidden group-hover:block"
+          class="submenu absolute mt-2 hidden group-hover:block"
         >
           <li
             v-for="(subItem, subIndex) in menuItem.submenu"
             :key="subIndex"
             :class="[
-              'px-4 py-2 cursor-pointer hover:bg-gray-200',
+              'px-2 py-2 cursor-pointer hover:bg-gray-200',
               subItem.disabled
                 ? 'text-gray-400 cursor-not-allowed hover:bg-transparent'
                 : '',
@@ -224,17 +222,17 @@ export default {
       </button>
     </div>
     <div class="divide-line"></div>
-    <div>
+    <div class="">
       <button class="text-sm mx-2 grayscale text-black hover:grayscale-0">
         <img src="/home.png" alt="home" class="m-auto w-6 h-6" />Home
       </button>
       <button
-        class="text-sm mr-2 grayscale text-black hover:grayscale-0"
+        class="text-sm grayscale text-black hover:grayscale-0"
       >
         <img src="/search_web.png" alt="favorites" class="m-auto w-6 h-6" />
         Search
       </button>
-      <button class="text-sm mr-2 grayscale text-black">
+      <button class="text-sm mx-2 grayscale text-black">
         <img
           src="/search_directory.png"
           alt="favorites"

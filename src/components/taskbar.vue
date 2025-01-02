@@ -346,7 +346,7 @@ img:hover {
         </li>
       </div>
       <div class="taskbar-right">
-        <li class="">EN/SI</li>
+        <li class="">EN</li>
         <li>
           <div class="hover:cursor-pointer">
             <img

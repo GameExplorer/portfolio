@@ -35,7 +35,7 @@ export default {
             <div
               class="mb-4 border-2 border-inset border-gray-400 p-2 bg-white"
             >
-              <img src="" alt="Profile Picture" class="w-full h-auto" />
+              <img src="/portfolio_icon.png" alt="Profile Picture" class="w-full h-auto" />
             </div>
             <div>
               <h2 class="font-bold mb-2 text-sm">Quick Info</h2>
@@ -118,6 +118,21 @@ export default {
           </div>
         </div>
         <div
+          class="bg-gray-100 border-2 border-t-gray-100 border-l-gray-100 border-r-gray-600 border-b-gray-600 p-4 mt-4"
+        >
+          <div class="title-bar p-2 text-white mb-3">
+            <h2 class="font-bold text-base">Other</h2>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <ul class="list-disc">
+                <li class="ml-4 text-sm underline"><a href="https://wakatime.com/@47roninhunter" target="_blank" class="text-blue-500">Wakatime</a></li>
+                <li class="ml-4 text-sm underline"><a href="https://codestats.net/users/GameExplorer" target="_blank" class="text-blue-500">Code:Stats</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
           class="bg-gray-100 border-2 border-t-gray-100 border-l-gray-100 border-r-gray-600 border-b-gray-600 p-4 mt-4 hidden"
         >
           <div class="window p-2 text-white mb-3">
@@ -136,7 +151,7 @@ export default {
         </div>
       </div>
       <div
-        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-16"
+        class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-32 lg:mb-0"
       >
         Last updated: December 2024
       </div>

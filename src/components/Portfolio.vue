@@ -13,7 +13,7 @@
       </li>
     </menu>
     <div class="" role="tabpanel">
-      <div class="window-body h-screen">
+      <div class="window-body">
         <component
           :is="tabs[currentTab].component"
           :key="refreshKey"

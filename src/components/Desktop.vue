@@ -139,13 +139,6 @@ export default {
 </script>
 
 <style>
-.desktop {
-  cursor: default;
-  background-image: url("/desktopBackground.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .desktop[data-cursor="progress"] {
   cursor: url("/windows-98-hourglass.png"), progress !important;
 }
@@ -169,6 +162,25 @@ export default {
 .desktop[data-cursor="pointer"] {
   cursor: url("/cursor_hover.png"), pointer;
 }
+
+.creditsWindow {
+  width: 400px;
+  height: 300px;
+  background-color: #c7c9c8;
+  border: 3px solid #ffffff;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-bottom-color: #7a7a7a;
+  border-right-color: #7a7a7a;
+  box-shadow: inset -1px -1px 1px #ffffff, inset 1px 1px 1px #7a7a7a;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 </style>
 
 <template>
@@ -178,7 +190,6 @@ export default {
       @dragover.prevent
       @drop.prevent
     >
-      <!-- Icons -->
       <div
         v-for="(icon, index) in icons"
         :key="index"
@@ -198,61 +209,62 @@ export default {
           {{ icon.name }}
         </p>
       </div>
-
-      <!-- Windows -->
       <template v-for="app in openApps" :key="app">
-        <div v-if="windowStates[app]?.isOpen" class="window fixed">
-          <!-- Portfolio Window -->
+        <div v-if="windowStates[app]?.isOpen" class="relative">
           <template v-if="app === 'Portfolio'">
-            <div class="title-bar">
-              <div class="title-bar-text text-2xl uppercase inline-flex">
-                <img src="/portfolio_icon.png" alt="page icon" class="pr-2" />
-                Portfolio
+            <div class="window">
+              <div class="title-bar">
+                <div class="title-bar-text text-2xl uppercase inline-flex">
+                  <img src="/portfolio_icon.png" alt="page icon" class="pr-2" />
+                  Portfolio
+                </div>
+                <div class="title-bar-controls p-2">
+                  <button
+                    aria-label="Minimize"
+                    class="bg-gray-300"
+                    @click="minimizeWindow(app)"
+                  ></button>
+                  <button
+                    aria-label="Close"
+                    class="bg-gray-300"
+                    @click="closeWindow(app)"
+                  >
+                    X
+                  </button>
+                </div>
               </div>
-              <div class="title-bar-controls p-2">
-                <button
-                  aria-label="Minimize"
-                  class="bg-gray-300"
-                  @click="minimizeWindow(app)"
-                ></button>
-                <button
-                  aria-label="Close"
-                  class="bg-gray-300"
-                  @click="closeWindow(app)"
-                >
-                  X
-                </button>
+              <MenuItems />
+              <div class="window-content p-4">
+                <Portfolio ref="portfolio" />
               </div>
-            </div>
-            <MenuItems />
-            <div class="window-content p-4">
-              <Portfolio ref="portfolio" />
             </div>
           </template>
-
-          <!-- Credits Window -->
           <template v-if="app === 'Credits'">
-            <div class="title-bar">
-              <div class="title-bar-text text-2xl uppercase inline-flex">
-                <img src="/notepad.png" alt="page icon" class="pr-2" />
-                Credits
+            <div class="window creditsWindow">
+               <div class="title-bar">
+                <div class="title-bar-text text-2xl uppercase inline-flex">
+                  <img src="/notepad.png" alt="page icon" class="pr-2" />
+                  Credits
+                </div>
+                <div class="title-bar-controls p-2">
+                  <button
+                    aria-label="Minimize"
+                    class="bg-gray-300"
+                    @click="minimizeWindow(app)"
+                  ></button>
+                  <button
+                    aria-label="Close"
+                    class="bg-gray-300"
+                    @click="closeWindow(app)"
+                  >
+                    X
+                  </button>
+                </div>
               </div>
-              <div class="title-bar-controls p-2">
-                <button
-                  aria-label="Minimize"
-                  class="bg-gray-300"
-                  @click="minimizeWindow(app)"
-                ></button>
-                <button
-                  aria-label="Close"
-                  class="bg-gray-300"
-                  @click="closeWindow(app)"
-                >
-                  X
-                </button>
+              <div class="window-content p-2 bg-gray-300">
+                <Credits />
               </div>
             </div>
-            <Credits />
           </template>
 
           <!-- System Information Window -->

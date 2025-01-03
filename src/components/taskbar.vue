@@ -55,6 +55,7 @@ export default {
 
 <style scoped>
 .taskbar {
+  font-family: "Microsoft Sans Serif", "Windows-Regular", sans-serif;
   background-color: #c7c9c8;
   border-top: 3px solid #ffffff;
   border-left: 3px solid #ffffff;
@@ -188,15 +189,6 @@ export default {
   box-shadow: inset -1px -1px 1px #ffffff, inset 1px 1px 1px #2a2a2a;
 }
 
-.menu-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 10px;
-  background-color: #000080;
-  color: white;
-}
-
 .user-icon {
   width: 2rem;
   height: 2rem;
@@ -240,7 +232,7 @@ export default {
   padding: 100% 0.5rem 0.5rem 0.1rem;
   position: absolute;
   bottom: 0;
-  left: 30%;
+  left: 15%;
 }
 
 .resetBtn button {
@@ -273,9 +265,14 @@ img:hover {
             Start
           </button>
           <div v-if="openStart" class="start-menu">
-            <div class="menu-header">
-              <img src="/portfolio_icon.png" alt="User" class="user-icon" />
-              <span class="text-xl">Petar</span>
+            <div
+              class="w-[3.5rem] h-full flex items-center justify-center bg-gradient-to-t from-blue-700 from-20% to-[#000080] to-60%"
+            >
+              <span
+                class="absolute uppercase text-2xl font-bold tracking-[1rem] whitespace-nowrap left-[30px] bottom-4 -rotate-90 origin-left text-white"
+              >
+                Petar
+              </span>
             </div>
             <div class="menu-divider"></div>
             <div class="menu-items">
@@ -318,7 +315,7 @@ img:hover {
             :key="index"
             class="taskbar-icon inline-flex items-center mx-1"
           >
-            <div 
+            <div
               class="flex flex-grow items-center cursor-pointer font-bold"
               @click="$emit('focus', app)"
             >

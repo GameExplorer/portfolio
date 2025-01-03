@@ -3,6 +3,7 @@ import Taskbar from "./taskbar.vue";
 import Portfolio from "./Portfolio.vue";
 import MenuItems from "./MenuItems.vue";
 import Credits from "./CreditsWindow.vue";
+import SystemInformation from "./SystemInformationWindow.vue";
 
 export default {
   name: "Desktop",
@@ -11,6 +12,7 @@ export default {
     Portfolio,
     MenuItems,
     Credits,
+    SystemInformation,
   },
   data() {
     return {
@@ -42,7 +44,7 @@ export default {
         {
           name: "System Information",
           iconImage: "/task_manager.png",
-          iconAlt: "Task Manager",
+          iconAlt: "System Information",
           url: "none",
           top: 150,
           left: 120,
@@ -52,7 +54,7 @@ export default {
       windowStates: {
         Portfolio: { isOpen: false },
         Credits: { isOpen: false },
-        "System Information": { isOpen: false },
+        'System Information': { isOpen: false },
       },
       openApps: [],
       randomOpenTime: 0,
@@ -99,12 +101,10 @@ export default {
         this.randomOpenTime = Math.floor(Math.random() * 1500);
 
         setTimeout(() => {
-          // Initialize the window state if it doesn't exist
           if (!this.windowStates[appName]) {
-            this.$set(this.windowStates, appName, { isOpen: false });
+            this.windowStates[appName] = { isOpen: false };
           }
 
-          // Set the window state to open
           this.windowStates[appName].isOpen = true;
 
           this.cursor = "default";
@@ -181,6 +181,25 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
+.systemWindow {
+  width: auto;
+  height: 70%;
+  background-color: #c7c9c8;
+  border: 3px solid #ffffff;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-bottom-color: #7a7a7a;
+  border-right-color: #7a7a7a;
+  box-shadow: inset -1px -1px 1px #ffffff, inset 1px 1px 1px #7a7a7a;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 </style>
 
 <template>
@@ -241,8 +260,8 @@ export default {
           </template>
           <template v-if="app === 'Credits'">
             <div class="window creditsWindow">
-               <div class="title-bar">
-                <div class="title-bar-text text-2xl uppercase inline-flex">
+              <div class="title-bar">
+                <div class="title-bar-text text-2xl inline-flex">
                   <img src="/notepad.png" alt="page icon" class="pr-2" />
                   Credits
                 </div>
@@ -266,31 +285,34 @@ export default {
               </div>
             </div>
           </template>
-
-          <!-- System Information Window -->
           <template v-if="app === 'System Information'">
-            <div class="title-bar">
-              <div class="title-bar-text text-2xl uppercase inline-flex">
-                <img src="/task_manager.png" alt="page icon" class="pr-2" />
-                System Information
+            <div class="window systemWindow">
+              <div class="title-bar">
+                <div class="title-bar-text text-xl inline-flex">
+                  <img src="/task_manager.png" alt="page icon" class="pr-2" />
+                  System Information
+                </div>
+                <div class="title-bar-controls p-2">
+                  <button
+                    aria-label="Minimize"
+                    class="bg-gray-300"
+                    @click="minimizeWindow(app)"
+                  ></button>
+                  <button
+                    aria-label="Close"
+                    class="bg-gray-300"
+                    @click="closeWindow(app)"
+                  >
+                    X
+                  </button>
+                </div>
               </div>
-              <div class="title-bar-controls p-2">
-                <button
-                  aria-label="Minimize"
-                  class="bg-gray-300"
-                  @click="minimizeWindow(app)"
-                ></button>
-                <button
-                  aria-label="Close"
-                  class="bg-gray-300"
-                  @click="closeWindow(app)"
-                >
-                  X
-                </button>
+              <div class="window-content p-2 bg-gray-300">
+                <SystemInformation  />
               </div>
             </div>
-            <!-- Add your System Information component here -->
           </template>
+          
         </div>
       </template>
     </div>

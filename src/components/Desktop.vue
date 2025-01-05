@@ -186,8 +186,10 @@ export default {
 }
 
 .systemWindow {
-  width: auto;
-  height: 70%;
+ width: 100%;
+  max-width: 720px;
+  height: 90vh; /* Default height for mobile */
+  max-height: 70%; /* Maximum height on larger screens */
   background-color: #c7c9c8;
   border: 3px solid #ffffff;
   border-top-color: #ffffff;
@@ -196,12 +198,11 @@ export default {
   border-right-color: #7a7a7a;
   box-shadow: inset -1px -1px 1px #ffffff, inset 1px 1px 1px #7a7a7a;
   position: fixed;
+  display: flex;
+  flex-direction: column;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 </style>
 
@@ -256,7 +257,7 @@ export default {
                 </div>
               </div>
               <MenuItems />
-              <div class="window-content p-4">
+              <div class="window-content p-4 h-screen">
                 <Portfolio ref="portfolio" />
               </div>
             </div>

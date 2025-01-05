@@ -50,12 +50,12 @@ export default {
 
 
 <template>
-  <div class="">
+  <div class="w-auto">
     <div class="grid grid-cols-2 gap-2">
       <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
         <h3 class="text-lg mb-4">CPU Usage</h3>
         <div class="meter-container relative h-6 bg-black border border-gray-600 mb-2">
-          <div 
+          <div
             class="h-full bg-[#000080] text-base"
             :style="{ width: `${cpuUsage}%` }"
           ></div>
@@ -71,7 +71,7 @@ export default {
       <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
         <h3 class="text-lg mb-4">Memory Usage</h3>
         <div class="relative h-6 bg-black border border-gray-600 mb-2">
-          <div 
+          <div
             class="meter-fill h-full bg-[#008000]"
             :style="{ width: `${memoryUsage}%` }"
           ></div>
@@ -88,7 +88,7 @@ export default {
       <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
         <h3 class="text-lg mb-4">Page File Usage</h3>
         <div class="relative h-6 bg-black border border-gray-600 mb-2">
-          <div 
+          <div
             class="h-full bg-[#800080]"
             :style="{ width: `${pageFile.usage}%` }"
           ></div>
@@ -104,3 +104,4 @@ export default {
     </div>
   </div>
 </template>
+

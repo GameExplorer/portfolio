@@ -116,7 +116,7 @@ export default {
       No processes are running
     </div>
 
-    <table v-else class="w-full border-collapse border-2 border-black">
+    <table v-else class="w-auto border-collapse border-2 border-black">
       <thead>
         <tr class="bg-[#c0c0c0]">
           <th

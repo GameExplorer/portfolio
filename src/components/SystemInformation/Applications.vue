@@ -59,29 +59,29 @@ export default {
 </script>
 
 <template>
-  <div class="applications-tab p-2">
+  <div class="w-full overflow-x-scroll lg:overflow-x-hidden">
     <div v-if="openApps.length === 0" class="text-center py-4 text-lg">
       No applications are running
     </div>
 
-    <table v-else class="w-full border-collapse border-2 border-black">
+    <table v-else class="w-full min-w-[600px] border-collapse border-2 border-black">
       <thead>
         <tr class="bg-[#c0c0c0]">
           <th
             @click="toggleSort"
-            class="text-left p-1 border border-gray-500 cursor-pointer text-base"
+            class="text-left p-1 border border-gray-500 cursor-pointer text-base whitespace-nowrap"
           >
             Application {{ sortOrder === "asc" ? "▲" : "▼" }}
           </th>
-          <th class="text-left text-base p-1 border border-gray-500">Status</th>
+          <th class="text-left text-base p-1 border border-gray-500 whitespace-nowrap">Status</th>
           <th
             @click="toggleSort"
-            class="text-left text-base p-1 border border-gray-500"
+            class="text-left text-base p-1 border border-gray-500 whitespace-nowrap"
           >
             Memory
           </th>
-          <th class="text-left text-base p-1 border border-gray-500">CPU</th>
-          <th class="text-left text-base p-1 border border-gray-500">Action</th>
+          <th class="text-left text-base p-1 border border-gray-500 whitespace-nowrap">CPU</th>
+          <th class="text-left text-base p-1 border border-gray-500 whitespace-nowrap">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -90,20 +90,20 @@ export default {
           :key="app"
           class="hover:bg-[#000080] hover:text-white"
         >
-          <td class="p-1 border border-gray-500">
+          <td class="p-1 border border-gray-500 whitespace-nowrap">
             <div class="flex items-center text-base">
               <img :src="getAppIcon(app)" :alt="app" class="w-4 h-4 mr-2" />
               {{ app }}
             </div>
           </td>
-          <td class="text-base p-1 border border-gray-500">Running</td>
-          <td class="text-base p-1 border border-gray-500">
+          <td class="text-base p-1 border border-gray-500 whitespace-nowrap">Running</td>
+          <td class="text-base p-1 border border-gray-500 whitespace-nowrap">
             {{ getMemoryUsage(app) }}
           </td>
-          <td class="text-base p-1 border border-gray-500">
+          <td class="text-base p-1 border border-gray-500 whitespace-nowrap">
             {{ getCPUUsage() }}%
           </td>
-          <td class="p-1 border border-gray-500">
+          <td class="p-1 border border-gray-500 whitespace-nowrap">
             <button
               @click="handleEndTask(app)"
               class="text-sm px-2 py-1 bg-[#c0c0c0] border border-gray-400 hover:bg-red-600 hover:text-white"

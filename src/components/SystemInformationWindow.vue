@@ -52,33 +52,15 @@ export default {
 };
 </script>
 
-<style>
-.memory-bar {
-  height: 20px;
-  width: 100%;
-  background-color: #ddd;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 5px;
-}
-
-.memory-fill {
-  height: 100%;
-  background-color: #4caf50;
-  transition: width 0.3s ease-in-out;
-}
-</style>
-
 <template>
-  <div class="menu-bar cursor-default">
+  <div class="w-auto px-4 menu-bar cursor-default">
     <WindowMenuItems />
   </div>
-  <div class="window-content">
+  <div class="window-content max-h-[90vh] md:max-h-[600px]">
     <div class="content text-lg">
       <menu
         role="tablist"
-        class="text-base z-10 flex justify-center items-center"
+        class="text-base z-10 flex flex-wrap justify-start items-center sticky top-0 left-2 bg-gray-300 w-auto"
       >
         <li
           v-for="(tab, index) in tabs"
@@ -93,7 +75,7 @@ export default {
       </menu>
       <div class="" role="tabpanel">
         <div
-          class="window-body p-2 border-2 border-l-white border-t-white border-r-black border-b-black"
+          class="window-body w-full p-2 border-2 border-l-white border-t-white border-r-black border-b-black"
         >
           <component
             :is="tabs[currentTab].component"
@@ -101,7 +83,7 @@ export default {
             :openApps="openApps"
             @end-task="$emit('end-task', $event)"
             v-if="isContentVisible"
-            class=""
+            class="w-full"
           ></component>
         </div>
       </div>

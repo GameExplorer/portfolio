@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-  <div class="">
+  <div class="w-full ">
     <div class="p-2">
       <h3 class="text-lg lg:text-xl mb-4 text-center uppercase">Network Adapter</h3>
       <div class="grid grid-cols-2 gap-4 mb-4">

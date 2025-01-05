@@ -198,7 +198,7 @@ export default {
       <div
         class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-32 lg:mb-0"
       >
-        Last updated: December 2024
+        Last updated: January 2025
       </div>
     </div>
   </div>

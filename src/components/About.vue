@@ -35,7 +35,11 @@ export default {
             <div
               class="mb-4 border-2 border-inset border-gray-400 p-2 bg-white"
             >
-              <img src="/portfolio_icon.png" alt="Profile Picture" class="w-full h-auto" />
+              <img
+                src="/portfolio_icon.png"
+                alt="Profile Picture"
+                class="w-full h-auto"
+              />
             </div>
             <div>
               <h2 class="font-bold mb-2 text-sm">Quick Info</h2>
@@ -50,7 +54,7 @@ export default {
                 </div>
                 <div class="flex items-center">
                   <span class="mr-2">📧</span>
-                  <span>Email: email@email.com</span>
+                  <span>Email: petar.petrovic.developer@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -62,8 +66,13 @@ export default {
               <div class="title-bar p-2 text-white mb-3">
                 <h2 class="font-bold text-base">About Me</h2>
               </div>
-              <p class="text-sm mb-4">
-                Tekst tekst tekst Nevem kaj bi napisal tukaj
+              <p class="text-base mb-2">
+                Hi, I'm Petar. I'm a developer that loves to develop
+                applications and websites. I have a passion for learning new
+                technologies and improving my skills. I like to work on projects
+                that challenge me and expand my horizon. In my free time I like
+                to develop projects that I find interesting and/or help me with
+                my hobbies.
               </p>
             </div>
             <div
@@ -74,24 +83,28 @@ export default {
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <h3 class="font-bold text-sm mb-2">Frontend</h3>
+                  <h3 class="font-bold text-sm mb-2"></h3>
                   <div class="space-y-2">
                     <div class="flex items-center">
-                      <ul class="list-disc">
-                        <li class="ml-4 text-sm">Vue.js</li>
-                        <li class="ml-4 text-sm">PHP</li>
-                        <li class="ml-4 text-sm">HTML/CSS</li>
+                      <ul class="list-disc text-base">
+                        <li class="ml-4">HTML</li>
+                        <li class="ml-4">CSS (TailwindCSS)</li>
+                        <li class="ml-4">JS (Vue.js)</li>
+                        <li class="ml-4">Linux</li>
+                        <li class="ml-4">Docker</li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="skill-category">
-                  <h3 class="font-bold text-sm mb-2">Backend</h3>
+                  <h3 class="font-bold text-sm mb-2"></h3>
                   <div class="space-y-2">
                     <div class="flex items-center">
-                      <ul class="list-disc">
+                      <ul class="list-disc text-base">
                         <li class="ml-4 text-sm">C#</li>
-                        <li class="ml-4 text-sm">SQL</li>
+                        <li class="ml-4 text-sm">SQL (MySQL, PostgreSQL)</li>
+                        <li class="ml-4 text-sm">PHP</li>
+                        <li class="ml-4 text-sm">Bash</li>
                       </ul>
                     </div>
                   </div>
@@ -108,11 +121,13 @@ export default {
           </div>
           <div class="space-y-4">
             <div>
-              <ul class="list-disc">
-                <li class="ml-4 text-sm">Hiking</li>
-                <li class="ml-4 text-sm">Reading</li>
-                <li class="ml-4 text-sm">Running</li>
-                <li class="ml-4 text-sm">Fitness</li>
+              <ul class="list-disc text-base">
+                <li class="ml-4">Hiking</li>
+                <li class="ml-4">Reading</li>
+                <li class="ml-4">Running</li>
+                <li class="ml-4">Fitness</li>
+                <li class="ml-4">3D Printing</li>
+                <li class="ml-4">Motorsport</li>
               </ul>
             </div>
           </div>
@@ -125,9 +140,39 @@ export default {
           </div>
           <div class="space-y-4">
             <div>
-              <ul class="list-disc">
-                <li class="ml-4 text-sm underline"><a href="https://wakatime.com/@47roninhunter" target="_blank" class="text-blue-500">Wakatime</a></li>
-                <li class="ml-4 text-sm underline"><a href="https://codestats.net/users/GameExplorer" target="_blank" class="text-blue-500">Code:Stats</a></li>
+              <ul class="list-disc text-base">
+                <li class="ml-4 underline">
+                  <a
+                    href="https://github.com/GameExplorer"
+                    target="_blank"
+                    class="text-blue-500"
+                    >Github</a
+                  >
+                </li>
+                <li class="ml-4 underline">
+                  <a
+                    href="https://gitlab.com/GameExplorer1"
+                    target="_blank"
+                    class="text-blue-500"
+                    >Gitlab</a
+                  >
+                </li>
+                <li class="ml-4 underline">
+                  <a
+                    href="https://wakatime.com/@47roninhunter"
+                    target="_blank"
+                    class="text-blue-500"
+                    >Wakatime</a
+                  >
+                </li>
+                <li class="ml-4 underline">
+                  <a
+                    href="https://codestats.net/users/GameExplorer"
+                    target="_blank"
+                    class="text-blue-500"
+                    >Code:Stats</a
+                  >
+                </li>
               </ul>
             </div>
           </div>

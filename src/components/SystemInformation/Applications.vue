@@ -1,168 +1,119 @@
 <script>
 export default {
-  name: "TaskManager",
+  name: "Applications",
+  props: {
+    openApps: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
+  },
   data() {
     return {
-      applications: [
-        {
-          name: "Portfolio.exe",
-          status: "Running",
-          memory: "24,568 K",
-          cpu: "01"
-        },
-        {
-          name: "SystemInformation.exe",
-          status: "Running",
-          memory: "12,844 K",
-          cpu: "00"
-        },
-        {
-          name: "Credits.exe",
-          status: "Not Responding",
-          memory: "18,232 K",
-          cpu: "02"
-        }
-      ],
-      selectedApp: null,
-      sortBy: 'name',
-      sortDirection: 'asc'
+      sortBy: "name",
+      sortOrder: "asc",
     };
   },
   computed: {
-    sortedApplications() {
-      return [...this.applications].sort((a, b) => {
-        let comparison = 0;
-        if (a[this.sortBy] < b[this.sortBy]) comparison = -1;
-        if (a[this.sortBy] > b[this.sortBy]) comparison = 1;
-        return this.sortDirection === 'asc' ? comparison : -comparison;
+    sortedApps() {
+      return [...this.openApps].sort((a, b) => {
+        if (this.sortOrder === "asc") {
+          return a.localeCompare(b);
+        }
+        return b.localeCompare(a);
       });
-    }
+    },
   },
   methods: {
-    selectApp(app) {
-      this.selectedApp = app;
+    getAppIcon(appName) {
+      const icons = {
+        Portfolio: "/portfolio_icon.png",
+        Credits: "/notepad.png",
+        "System Information": "/task_manager.png",
+      };
+      return icons[appName] || "/portfolio_icon.png";
     },
-    sortApps(field) {
-      if (this.sortBy === field) {
-        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-      } else {
-        this.sortBy = field;
-        this.sortDirection = 'asc';
-      }
+
+    getMemoryUsage(app) {
+      const memory = {
+        Portfolio: "24,568 K",
+        Credits: "12,444 K",
+        "System Information": "18,756 K",
+      };
+      return memory[app] || "15,000 K";
     },
-    endTask() {
-      if (this.selectedApp) {
-        this.applications = this.applications.filter(app => app !== this.selectedApp);
-        this.selectedApp = null;
-      }
+
+    getCPUUsage() {
+      return Math.floor(Math.random() * 5) + 1;
+    },
+
+    toggleSort() {
+      this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc";
+    },
+
+    handleEndTask(app) {
+      this.$emit('end-task', app);
     }
-  }
+  },
 };
 </script>
 
-<style scoped >
-.task-manager {
-  font-family: "Microsoft Sans Serif", Tahoma, sans-serif;
-  background-color: #c0c0c0;
-  border: 2px solid;
-  border-top-color: #dfdfdf;
-  border-left-color: #dfdfdf;
-  border-right-color: #808080;
-  border-bottom-color: #808080;
-  box-shadow: inset 1px 1px #ffffff, inset -1px -1px #0a0a0a;
-}
-
-.title-bar {
-  background: linear-gradient(90deg, #000080, #1084d0);
-  padding: 3px 2px 3px 3px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.button-98 {
-  background-color: #c0c0c0;
-  border: 1px solid;
-  border-top-color: #dfdfdf;
-  border-left-color: #dfdfdf;
-  border-right-color: #808080;
-  border-bottom-color: #808080;
-  box-shadow: inset 1px 1px #ffffff, inset -1px -1px #0a0a0a;
-  padding: 4px 10px;
-  margin: 2px;
-}
-
-.button-98:disabled {
-  color: #808080;
-  text-shadow: 1px 1px #ffffff;
-}
-
-.button-98:active {
-  border-top-color: #808080;
-  border-left-color: #808080;
-  border-right-color: #dfdfdf;
-  border-bottom-color: #dfdfdf;
-  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a;
-}
-
-.table-header {
-  cursor: pointer;
-  user-select: none;
-}
-
-.table-header:hover {
-  background-color: #dfdfdf;
-}
-
-.selected-row {
-  background-color: #000080 !important;
-  color: white;
-}
-</style>
-
 <template>
-  <div class="task-manager w-[500px]">
-    <div class="title-bar">
-      <div class="flex items-center">
-        <img src="/task_manager.png" alt="Task Manager" class="w-4 h-4 mr-2" />
-        <span class="text-white">Windows Task Manager</span>
-      </div>
-      <div class="flex">
-        <button class="text-white px-2 hover:bg-red-600">✕</button>
-      </div>
+  <div class="applications-tab p-2">
+    <div v-if="openApps.length === 0" class="text-center py-4 text-lg">
+      No applications are running
     </div>
 
-    <div class="p-4">
-      <div class="text-sm mb-4">Applications</div>
-      
-      <div class="bg-white border border-gray-400 mb-4">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-gray-400">
-              <th @click="sortApps('name')" class="table-header text-left p-1 border-r border-gray-400">Task</th>
-              <th @click="sortApps('status')" class="table-header text-left p-1 border-r border-gray-400">Status</th>
-              <th @click="sortApps('memory')" class="table-header text-right p-1 border-r border-gray-400">Mem Usage</th>
-              <th @click="sortApps('cpu')" class="table-header text-right p-1">CPU</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="app in sortedApplications" 
-                :key="app.name"
-                :class="{'selected-row': selectedApp === app}"
-                @click="selectApp(app)"
-                class="hover:bg-gray-100 cursor-pointer">
-              <td class="p-1 border-r border-gray-400">{{ app.name }}</td>
-              <td class="p-1 border-r border-gray-400">{{ app.status }}</td>
-              <td class="p-1 border-r border-gray-400 text-right">{{ app.memory }}</td>
-              <td class="p-1 text-right">{{ app.cpu }}%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="flex justify-end space-x-2">
-        <button class="button-98" :disabled="!selectedApp" @click="endTask">End Task</button>
-      </div>
-    </div>
+    <table v-else class="w-full border-collapse border-2 border-black">
+      <thead>
+        <tr class="bg-[#c0c0c0]">
+          <th
+            @click="toggleSort"
+            class="text-left p-1 border border-gray-500 cursor-pointer text-base"
+          >
+            Application {{ sortOrder === "asc" ? "▲" : "▼" }}
+          </th>
+          <th class="text-left text-base p-1 border border-gray-500">Status</th>
+          <th
+            @click="toggleSort"
+            class="text-left text-base p-1 border border-gray-500"
+          >
+            Memory
+          </th>
+          <th class="text-left text-base p-1 border border-gray-500">CPU</th>
+          <th class="text-left text-base p-1 border border-gray-500">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="app in sortedApps"
+          :key="app"
+          class="hover:bg-[#000080] hover:text-white"
+        >
+          <td class="p-1 border border-gray-500">
+            <div class="flex items-center text-base">
+              <img :src="getAppIcon(app)" :alt="app" class="w-4 h-4 mr-2" />
+              {{ app }}
+            </div>
+          </td>
+          <td class="text-base p-1 border border-gray-500">Running</td>
+          <td class="text-base p-1 border border-gray-500">
+            {{ getMemoryUsage(app) }}
+          </td>
+          <td class="text-base p-1 border border-gray-500">
+            {{ getCPUUsage() }}%
+          </td>
+          <td class="p-1 border border-gray-500">
+            <button
+              @click="handleEndTask(app)"
+              class="text-sm px-2 py-1 bg-[#c0c0c0] border border-gray-400 hover:bg-red-600 hover:text-white"
+            >
+              End Task
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
+

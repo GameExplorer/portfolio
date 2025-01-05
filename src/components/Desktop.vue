@@ -54,7 +54,7 @@ export default {
       windowStates: {
         Portfolio: { isOpen: false },
         Credits: { isOpen: false },
-        'System Information': { isOpen: false },
+        "System Information": { isOpen: false },
       },
       openApps: [],
       randomOpenTime: 0,
@@ -133,6 +133,9 @@ export default {
       if (this.openApps.includes(appName) && this.windowStates[appName]) {
         this.windowStates[appName].isOpen = true;
       }
+    },
+    handleEndTask(appName) {
+      this.closeWindow(appName);
     },
   },
 };
@@ -308,11 +311,13 @@ export default {
                 </div>
               </div>
               <div class="window-content p-2 bg-gray-300">
-                <SystemInformation  />
+                <SystemInformation
+                  :openApps="openApps"
+                  @end-task="handleEndTask"
+                />
               </div>
             </div>
           </template>
-          
         </div>
       </template>
     </div>

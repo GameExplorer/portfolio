@@ -137,6 +137,21 @@ export default {
     handleEndTask(appName) {
       this.closeWindow(appName);
     },
+    handleMoveForward() {
+      if (this.$refs.portfolio) {
+        this.$refs.portfolio.moveForward();
+      }
+    },
+    handleMoveBackward() {
+      if (this.$refs.portfolio) {
+        this.$refs.portfolio.moveBackward();
+      }
+    },
+    handleRefreshContent() {
+      if (this.$refs.portfolio) {
+        this.$refs.portfolio.refreshContent();
+      }
+    },
   },
 };
 </script>
@@ -208,26 +223,11 @@ export default {
 
 <template>
   <div class="desktop h-screen flex flex-col" :data-cursor="cursor">
-    <div
-      class="flex-grow relative overflow-hidden"
-      @dragover.prevent
-      @drop.prevent
-    >
-      <div
-        v-for="(icon, index) in icons"
-        :key="index"
-        class="cursor-pointer absolute icon"
-        :style="{ top: `${icon.top}px`, left: `${icon.left}px` }"
-        draggable="true"
-        @dragstart="startDrag($event, index)"
-        @dragend="endDrag($event, index)"
-        @click="openWindow(icon.name)"
-      >
-        <img
-          :src="icon.iconImage"
-          :alt="icon.iconAlt"
-          class="w-12 h-12 m-auto icons"
-        />
+    <div class="flex-grow relative overflow-hidden" @dragover.prevent @drop.prevent>
+      <div v-for="(icon, index) in icons" :key="index" class="cursor-pointer absolute icon"
+        :style="{ top: `${icon.top}px`, left: `${icon.left}px` }" draggable="true" @dragstart="startDrag($event, index)"
+        @dragend="endDrag($event, index)" @click="openWindow(icon.name)">
+        <img :src="icon.iconImage" :alt="icon.iconAlt" class="w-12 h-12 m-auto icons" />
         <p class="text-xs text-center text-white bg-gray-500 mt-1">
           {{ icon.name }}
         </p>
@@ -242,21 +242,14 @@ export default {
                   Portfolio
                 </div>
                 <div class="title-bar-controls p-2">
-                  <button
-                    aria-label="Minimize"
-                    class="bg-gray-300"
-                    @click="minimizeWindow(app)"
-                  ></button>
-                  <button
-                    aria-label="Close"
-                    class="bg-gray-300"
-                    @click="closeWindow(app)"
-                  >
+                  <button aria-label="Minimize" class="bg-gray-300" @click="minimizeWindow(app)"></button>
+                  <button aria-label="Close" class="bg-gray-300" @click="closeWindow(app)">
                     X
                   </button>
                 </div>
               </div>
-              <MenuItems />
+              <MenuItems @move-forward="handleMoveForward" @move-backward="handleMoveBackward"
+                @refresh-content="handleRefreshContent" />
               <div class="window-content p-4 h-screen">
                 <Portfolio ref="portfolio" />
               </div>
@@ -270,16 +263,8 @@ export default {
                   Credits
                 </div>
                 <div class="title-bar-controls p-2">
-                  <button
-                    aria-label="Minimize"
-                    class="bg-gray-300"
-                    @click="minimizeWindow(app)"
-                  ></button>
-                  <button
-                    aria-label="Close"
-                    class="bg-gray-300"
-                    @click="closeWindow(app)"
-                  >
+                  <button aria-label="Minimize" class="bg-gray-300" @click="minimizeWindow(app)"></button>
+                  <button aria-label="Close" class="bg-gray-300" @click="closeWindow(app)">
                     X
                   </button>
                 </div>
@@ -297,25 +282,14 @@ export default {
                   System Information
                 </div>
                 <div class="title-bar-controls p-2">
-                  <button
-                    aria-label="Minimize"
-                    class="bg-gray-300"
-                    @click="minimizeWindow(app)"
-                  ></button>
-                  <button
-                    aria-label="Close"
-                    class="bg-gray-300"
-                    @click="closeWindow(app)"
-                  >
+                  <button aria-label="Minimize" class="bg-gray-300" @click="minimizeWindow(app)"></button>
+                  <button aria-label="Close" class="bg-gray-300" @click="closeWindow(app)">
                     X
                   </button>
                 </div>
               </div>
               <div class="window-content p-2 bg-gray-300">
-                <SystemInformation
-                  :openApps="openApps"
-                  @end-task="handleEndTask"
-                />
+                <SystemInformation :openApps="openApps" @end-task="handleEndTask" />
               </div>
             </div>
           </template>
@@ -324,12 +298,7 @@ export default {
     </div>
 
     <div ref="taskbar" class="taskbar fixed w-full bottom-0 right-0 z-20">
-      <Taskbar
-        :openApps="openApps"
-        @close="closeWindow"
-        @focus="focusApp"
-        @open="openWindow"
-      />
+      <Taskbar :openApps="openApps" @close="closeWindow" @focus="focusApp" @open="openWindow" />
     </div>
   </div>
 </template>

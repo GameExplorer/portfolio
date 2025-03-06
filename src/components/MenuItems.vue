@@ -61,15 +61,7 @@ export default {
     };
   },
   methods: {
-    moveForward() {
-      this.$parent.$refs.portfolio.moveForward();
-    },
-    moveBackward() {
-      this.$parent.$refs.portfolio.moveBackward();
-    },
-    refreshContent() {
-      this.$parent.$refs.portfolio.refreshContent();
-    },
+
   },
 };
 </script>
@@ -146,6 +138,7 @@ export default {
   background-repeat: no-repeat;
   background-position: 5px center;
   padding-left: 2em;
+  font-size: 1.0rem;
 }
 
 .function-buttons {
@@ -251,7 +244,7 @@ export default {
     <input
       v-model="url"
       type="text"
-      class="w-full ml-2 text-base"
+      class="w-full ml-2"
       placeholder="Enter URL"
       @keydown.enter="openURL"
     />

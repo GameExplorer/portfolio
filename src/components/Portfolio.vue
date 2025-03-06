@@ -1,30 +1,3 @@
-<template>
-  <div class="justify-center items-center z-1">
-    <menu role="tablist" class="bg-[#c7c9c8] text-2xl z-10 flex justify-center items-center">
-      <li
-        v-for="(tab, index) in tabs"
-        :key="index"
-        role="tab"
-        :aria-selected="currentTab === index"
-      >
-        <a href="#tabs" @click.prevent="setCurrentTab(index)">
-          {{ tab.name }}
-        </a>
-      </li>
-    </menu>
-    <div class="" role="tabpanel">
-      <div class="window-body">
-        <component
-          :is="tabs[currentTab].component"
-          :key="refreshKey"
-          v-if="isContentVisible"
-          class=""
-        ></component>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 import Projects from "./Projects.vue";
 import About from "./About.vue";
@@ -37,12 +10,9 @@ export default {
     About,
     Contact,
   },
-  
+
   data() {
     return {
-      currentTab: 0,
-      refreshKey: 0,
-      isContentVisible: true,
       tabs: [
         { name: "About", component: "About" },
         { name: "Projects", component: "Projects" },
@@ -51,26 +21,21 @@ export default {
     };
   },
   methods: {
-    setCurrentTab(index) {
-      this.currentTab = index;
-    },
-    moveForward() {
-      this.currentTab = (this.currentTab + 1) % this.tabs.length;
-    },
-    moveBackward() {
-      this.currentTab =
-        (this.currentTab - 1 + this.tabs.length) % this.tabs.length;
-    },
-    refreshContent() {
-      this.isContentVisible = false;
-      this.refreshKey += 1;
-      
-      setTimeout(() => {
-        this.isContentVisible = true;
-      }, 1000);
-    },
+
   },
   expose: ["moveForward", "moveBackward", "refreshContent"],
 };
 </script>
 
+
+<template>
+  <div class="border-2 border-gray-400 max-w-5xl lg:max-w-full mx-auto mb-24 h-[600px] lg:h-[700px] overflow-y-auto">
+    <About />
+    <Projects />
+    <Contact />
+    <div class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-32 lg:mb-0">
+      Last updated: March 2025
+    </div>
+  </div>
+
+</template>

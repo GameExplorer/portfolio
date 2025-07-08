@@ -34,6 +34,14 @@ export default {
           left: 150,
         },
         {
+          name: "RateGP",
+          iconImage: "RateGP_icon.png",
+          iconAlt: "RateGP icon",
+          url: "https://www.rategp.app/",
+          top: 250,
+          left: 50,
+        },
+        {
           name: "Credits",
           iconImage: "/notepad.png",
           iconAlt: "Credits",

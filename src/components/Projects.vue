@@ -67,6 +67,15 @@ export default {
           technologies: ["ReactJS", "Python", "MapServer"],
           demo: "https://droughtwatch.geocodis.com/home",
         },
+        {
+          id: 7,
+          title: "RateGP",
+          type: "web",
+          description: "RateGP is a web application that allows users to rate and review Grand Prix events. It provides a platform for motorsport enthusiasts to share their opinions and experiences.",
+          image: "/ProjectImages/RateGP_icon.png",
+          technologies: ["Vue.js", "JS", "Tailwind CSS", "Pinia"],
+          demo: "https://www.rategp.app/"
+        }
       ],
     };
   },

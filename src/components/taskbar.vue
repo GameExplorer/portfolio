@@ -1,4 +1,5 @@
 <script>
+import HappyMessage from "./HappyMessage.vue";
 import happyMessage from "./HappyMessage.vue";
 export default {
   name: "Taskbar",
@@ -30,6 +31,7 @@ export default {
         Portfolio: "/portfolio_icon.png",
         Credits: "/notepad.png",
         "System Information": "/task_manager.png",
+        HappyMessage: "/info.png",
       };
       return icons[appName] || "/portfolio_icon.png";
     },

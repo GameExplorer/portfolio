@@ -34,7 +34,7 @@ export default {
     <Projects />
     <Contact />
     <div class="status-bar border-t-2 border-gray-400 p-2 bg-gray-200 text-sm mb-32 lg:mb-0">
-      Last updated: March 2025
+      Last updated: July 2025
     </div>
   </div>
 

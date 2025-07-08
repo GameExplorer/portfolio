@@ -16,8 +16,8 @@ export default {
     <div class="p-0">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-gray-100 border-2 border-t-gray-200 border-l-gray-200 border-r-gray-600 border-b-gray-600 p-4">
-          <div class="mb-4 border-2 border-inset border-gray-400 p-2 bg-white">
-            <img src="/portfolio_icon.png" alt="Profile Picture" class="w-full h-auto" />
+          <div class="mb-4 border-2 border-inset border-gray-400 p-2 bg-white hidden">
+            <img src="/portfolio_icon.png" alt="Profile Picture" class="w-full h-auto hidden" />
           </div>
           <div>
             <h2 class="font-bold mb-2 text-sm">Quick Info</h2>
@@ -28,7 +28,7 @@ export default {
               </div>
               <div class="flex items-center">
                 <span class="mr-2">💼</span>
-                <span>Role: Developer</span>
+                <span>Role: Student</span>
               </div>
               <div class="flex items-center">
                 <span class="mr-2">📧</span>
@@ -77,9 +77,10 @@ export default {
                   <div class="flex items-center">
                     <ul class="list-disc text-xl">
                       <li class="ml-4">C#</li>
-                      <li class="ml-4">SQL (MySQL, PostgreSQL)</li>
+                      <li class="ml-4">SQL</li>
                       <li class="ml-4">PHP</li>
                       <li class="ml-4">Bash</li>
+                      <li class="ml-4">XML</li>
                     </ul>
                   </div>
                 </div>

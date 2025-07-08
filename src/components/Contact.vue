@@ -14,6 +14,5 @@ export default {
   <div class="window-content p-4 bg-gray-200 text-lg">
     <div>I'm available at</div>
     <div>Email: <span class="font-bold">petar.petrovic.developer@gmail.com</span></div>
-
   </div>
 </template>

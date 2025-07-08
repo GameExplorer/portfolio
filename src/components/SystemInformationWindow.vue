@@ -56,7 +56,7 @@ export default {
   <div class="w-auto px-4 menu-bar cursor-default">
     <WindowMenuItems />
   </div>
-  <div class="window-content max-h-[90vh] md:max-h-[600px]">
+  <div class="max-h-[90vh] md:max-h-[600px]">
     <div class="content text-lg">
       <menu
         role="tablist"

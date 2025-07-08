@@ -50,6 +50,27 @@ export default {
           threads: 8,
           isSystem: true,
         },
+        {
+          name: "svchost.exe",
+          pid: 1234,
+          priority: 10,
+          threads: 5,
+          isSystem: true,
+        },
+        {
+          name: "csrss.exe",
+          pid: 5678,
+          priority: 9,
+          threads: 6,
+          isSystem: true,
+        },
+        {
+          name: "coding.exe",
+          pid: 1337,
+          priority: 24,
+          threads: 7,
+          isSystem: true,
+        }
       ],
       appPIDs: new Map(),
     };
@@ -111,12 +132,12 @@ export default {
 </script>
 
 <template>
-  <div class="applications-tab p-2">
+  <div class="p-2">
     <div v-if="allProcesses.length === 0" class="text-center py-4 text-lg">
       No processes are running
     </div>
 
-    <table v-else class="w-auto border-collapse border-2 border-black">
+    <table v-else class="w-full border-collapse border-2 border-black">
       <thead>
         <tr class="bg-[#c0c0c0]">
           <th

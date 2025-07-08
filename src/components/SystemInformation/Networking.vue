@@ -43,52 +43,94 @@ export default {
 </script>
 
 <template>
-  <div class="w-full ">
+  <div class="w-full">
     <div class="p-2">
       <h3 class="text-lg lg:text-xl mb-4 text-center uppercase">Network Adapter</h3>
-      <div class="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <p class="mb-2">Bytes Received/sec</p>
-          <div class="meter-container relative h-6 bg-black border border-gray-600">
-            <div 
-              class="meter-fill h-full bg-[#000080]"
-              :style="{ width: `${(bytesReceived / 1000) * 100}%` }"
-            ></div>
-            <div class="absolute top-0 left-0 w-full text-center text-white">
-              {{ bytesReceived }} Kb/s
+      <div class="hidden md:block">
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p class="mb-2">Bytes Received/sec</p>
+            <div class="meter-container relative h-6 bg-black border border-gray-600">
+              <div class="meter-fill h-full bg-[#000080]" :style="{ width: `${(bytesReceived / 1000) * 100}%` }"></div>
+              <div class="absolute top-0 left-0 w-full text-center text-white">
+                {{ bytesReceived }} Kb/s
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2">Bytes Sent/sec</p>
+            <div class="meter-container relative h-6 bg-black border border-gray-600">
+              <div class="meter-fill h-full bg-[#008000]" :style="{ width: `${(bytesSent / 1000) * 100}%` }"></div>
+              <div class="absolute top-0 left-0 w-full text-center text-white">
+                {{ bytesSent }} Kb/s
+              </div>
             </div>
           </div>
         </div>
-        <div>
-          <p class="mb-2">Bytes Sent/sec</p>
-          <div class="meter-container relative h-6 bg-black border border-gray-600">
-            <div 
-              class="meter-fill h-full bg-[#008000]"
-              :style="{ width: `${(bytesSent / 1000) * 100}%` }"
-            ></div>
-            <div class="absolute top-0 left-0 w-full text-center text-white">
-              {{ bytesSent }} Kb/s
+        <div class="grid grid-cols-2 gap-4">
+          <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
+            <h4 class="text-md mb-2">Network Statistics</h4>
+            <div class="space-y-2 text-sm">
+              <p>Adapter Type: Ethernet</p>
+              <p>IP Address: 192.168.1.100</p>
+              <p>Subnet Mask: 255.255.255.0</p>
+              <p>Default Gateway: 192.168.1.1</p>
+            </div>
+          </div>
+          <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
+            <h4 class="text-md mb-2">Bytes Totals</h4>
+            <div class="space-y-2 text-sm">
+              <p>Total Received: {{ Math.floor(totalReceived / 1024) }} MB</p>
+              <p>Total Sent: {{ Math.floor(totalSent / 1024) }} MB</p>
+              <p>Status: Connected</p>
+              <p>Speed: 100.0 Mbps</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
-          <h4 class="text-md mb-2">Network Statistics</h4>
-          <div class="space-y-2 text-sm">
-            <p>Adapter Type: Ethernet</p>
-            <p>IP Address: 192.168.1.100</p>
-            <p>Subnet Mask: 255.255.255.0</p>
-            <p>Default Gateway: 192.168.1.1</p>
+      <div class="md:hidden">
+        <div class="space-y-4 mb-4">
+          <div>
+            <p class="mb-2 text-sm">Bytes Received/sec</p>
+            <div class="meter-container relative h-5 bg-black border border-gray-600">
+              <div class="meter-fill h-full bg-[#000080]" :style="{ width: `${(bytesReceived / 1000) * 100}%` }"></div>
+              <div class="absolute top-0 left-0 w-full text-center text-white text-xs">
+                {{ bytesReceived }} Kb/s
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 text-sm">Bytes Sent/sec</p>
+            <div class="meter-container relative h-5 bg-black border border-gray-600">
+              <div class="meter-fill h-full bg-[#008000]" :style="{ width: `${(bytesSent / 1000) * 100}%` }"></div>
+              <div class="absolute top-0 left-0 w-full text-center text-white text-xs">
+                {{ bytesSent }} Kb/s
+              </div>
+            </div>
           </div>
         </div>
-        <div class="border-2 border-t-white border-l-white border-r-black border-b-black p-4">
-          <h4 class="text-md mb-2">Bytes Totals</h4>
-          <div class="space-y-2 text-sm">
-            <p>Total Received: {{ Math.floor(totalReceived / 1024) }} MB</p>
-            <p>Total Sent: {{ Math.floor(totalSent / 1024) }} MB</p>
-            <p>Status: Connected</p>
-            <p>Speed: 100.0 Mbps</p>
+        <div class="overflow-x-auto overflow-y-hidden">
+          <div class="flex gap-3 min-w-max pb-2">
+            <div
+              class="border-2 border-t-white border-l-white border-r-black border-b-black p-3 min-w-[260px] flex-shrink-0">
+              <h4 class="text-sm mb-2">Network Statistics</h4>
+              <div class="space-y-1 text-xs">
+                <p>Adapter Type: Ethernet</p>
+                <p>IP Address: 192.168.1.100</p>
+                <p>Subnet Mask: 255.255.255.0</p>
+                <p>Default Gateway: 192.168.1.1</p>
+              </div>
+            </div>
+            <div
+              class="border-2 border-t-white border-l-white border-r-black border-b-black p-3 min-w-[260px] flex-shrink-0">
+              <h4 class="text-sm mb-2">Bytes Totals</h4>
+              <div class="space-y-1 text-xs">
+                <p>Total Received: {{ Math.floor(totalReceived / 1024) }} MB</p>
+                <p>Total Sent: {{ Math.floor(totalSent / 1024) }} MB</p>
+                <p>Status: Connected</p>
+                <p>Speed: 100.0 Mbps</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

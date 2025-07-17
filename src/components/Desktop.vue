@@ -112,7 +112,7 @@ export default {
 
       if (routeApps[appName]) {
         // Change the URL
-        window.history.pushState({}, '', routeApps[appName]);
+        this.$router.push(routeApps[appName]);
 
         // Then open the window normally
         this.cursor = "progress";
@@ -159,7 +159,8 @@ export default {
 
       if (routeApps.includes(appName)) {
         // Change URL back to home
-        window.history.pushState({}, '', '/');
+        this.$router.push('/');
+        return;
       }
 
       if (this.windowStates[appName]) {
@@ -173,7 +174,8 @@ export default {
 
       if (routeApps.includes(appName)) {
         // Change URL back to home when minimizing
-        window.history.pushState({}, '', '/');
+        this.$router.push('/');
+        return;
       }
 
       if (this.windowStates[appName]) {
@@ -204,6 +206,42 @@ export default {
         this.$refs.portfolio.refreshContent();
       }
     },
+
+    handleRouteChange() {
+      const routeToApp = {
+        'Portfolio': 'Portfolio',
+        'SystemInformation': 'System Information',
+        'Credits': 'Credits'
+      };
+
+      const appName = routeToApp[this.$route.name];
+
+      if (appName) {
+        // Auto-open the window for this route
+        if (!this.windowStates[appName]) {
+          this.windowStates[appName] = { isOpen: false };
+        }
+        this.windowStates[appName].isOpen = true;
+        if (!this.openApps.includes(appName)) {
+          this.openApps.push(appName);
+        }
+      } else {
+        // Close all windows when on home route
+        Object.keys(this.windowStates).forEach(app => {
+          this.windowStates[app].isOpen = false;
+        });
+        this.openApps = [];
+      }
+    }
+  },
+  mounted() {
+    this.handleRouteChange();
+  },
+
+  watch: {
+    '$route'() {
+      this.handleRouteChange();
+    }
   },
 };
 </script>

@@ -101,10 +101,20 @@ export default {
     },
     openWindow(appName) {
       const app = this.icons.find((icon) => icon.name === appName);
-
       if (!app) return;
 
-      if (app.url === "none") {
+      // Handle apps that should change URL
+      const routeApps = {
+        'Portfolio': '/portfolio',
+        'System Information': '/system_information',
+        'Credits': '/credits'
+      };
+
+      if (routeApps[appName]) {
+        // Change the URL
+        window.history.pushState({}, '', routeApps[appName]);
+
+        // Then open the window normally
         this.cursor = "progress";
         this.randomOpenTime = Math.floor(Math.random() * 1500);
 
@@ -112,19 +122,46 @@ export default {
           if (!this.windowStates[appName]) {
             this.windowStates[appName] = { isOpen: false };
           }
-
           this.windowStates[appName].isOpen = true;
-
           this.cursor = "default";
           if (!this.openApps.includes(appName)) {
             this.openApps.push(appName);
           }
         }, this.randomOpenTime);
-      } else {
-        window.open(app.url, "_blank");
+        return;
       }
+
+      // Handle external URLs
+      if (app.url !== "none") {
+        window.open(app.url, "_blank");
+        return;
+      }
+
+      // Handle other apps (if any)
+      this.cursor = "progress";
+      this.randomOpenTime = Math.floor(Math.random() * 1500);
+
+      setTimeout(() => {
+        if (!this.windowStates[appName]) {
+          this.windowStates[appName] = { isOpen: false };
+        }
+        this.windowStates[appName].isOpen = true;
+        this.cursor = "default";
+        if (!this.openApps.includes(appName)) {
+          this.openApps.push(appName);
+        }
+      }, this.randomOpenTime);
     },
+
     closeWindow(appName) {
+      // Handle route-based apps
+      const routeApps = ['Portfolio', 'System Information', 'Credits'];
+
+      if (routeApps.includes(appName)) {
+        // Change URL back to home
+        window.history.pushState({}, '', '/');
+      }
+
       if (this.windowStates[appName]) {
         this.windowStates[appName].isOpen = false;
       }
@@ -132,6 +169,13 @@ export default {
     },
 
     minimizeWindow(appName) {
+      const routeApps = ['Portfolio', 'System Information', 'Credits'];
+
+      if (routeApps.includes(appName)) {
+        // Change URL back to home when minimizing
+        window.history.pushState({}, '', '/');
+      }
+
       if (this.windowStates[appName]) {
         this.windowStates[appName].isOpen = false;
       }
